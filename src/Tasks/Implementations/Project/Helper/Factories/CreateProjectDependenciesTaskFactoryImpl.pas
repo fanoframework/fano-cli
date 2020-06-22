@@ -71,6 +71,8 @@ uses
     TextFileCreatorImpl,
     ContentModifierImpl,
     CreateCompilerConfigsTaskImpl,
+    CreateWpoCompilerConfigsTaskImpl,
+    CompositeWpoTaskImpl,
     CreateCurlCompilerConfigsTaskImpl,
     CreateAppConfigsTaskImpl,
     CreateSessionJsonAppConfigsTaskImpl,
@@ -104,10 +106,14 @@ uses
         aWriter := aReader as IFileContentWriter;
         //wrap so that when --with-curl is set, it will enable -dLIBCURL
         result := TCreateCurlCompilerConfigsTask.create(
-            TCreateCompilerConfigsTask.create(textFileCreator, contentModifier),
+            //if --with-wpo is set, use WPO related config
+            TCompositeWpoTask.create(
+                TCreateWpoCompilerConfigsTask.create(textFileCreator, contentModifier),
+                TCreateCompilerConfigsTask.create(textFileCreator, contentModifier)
+            ),
             aReader,
             aWriter
-        );      
+        );
     end;
 
     function TCreateProjectDependenciesTaskFactory.buildConfigProjectTask(

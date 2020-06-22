@@ -20,6 +20,8 @@ strConfigSetupCmd: string =
     '' + LineEnding +
     'IF EXIST config\config.json.sample (copy config\config.json.sample config\config.json)' + LineEnding +
     'IF EXIST config\config.ini.sample (copy config\config.ini.sample config\config.ini)' + LineEnding +
+    'IF EXIST build.global.prod.cfg.sample (copy build.global.prod.cfg.sample build.global.prod.cfg)' + LineEnding +
+    'IF EXIST build.prodwpo.cfg.sample (copy build.prodwpo.cfg.sample build.prodwpo.cfg)' + LineEnding +
     'copy build.prod.cfg.sample build.prod.cfg' + LineEnding +
     'copy build.dev.cfg.sample build.dev.cfg' + LineEnding +
     'copy build.cfg.sample build.cfg';

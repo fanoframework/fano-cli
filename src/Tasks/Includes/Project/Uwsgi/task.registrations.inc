@@ -21,6 +21,7 @@ try
         '     --port=[port where uwsgi app listen] if omited, 20477 is assumed.' + LineEnding +
         '     --with-session=[file, cookie, db] Add session support' + LineEnding +
         '     --with-middleware Add middleware support' + LineEnding +
+        '     --with-wpo Add whole program optimization build script' + LineEnding +
         '     --no-git if omitted, git repository is created.' + LineEnding +
         '     --no-initial-commit if omitted, git repository is created with initial commit.',
         taskFactory.build()

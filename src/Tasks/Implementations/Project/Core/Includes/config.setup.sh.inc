@@ -25,6 +25,12 @@ strConfigSetupSh: string =
     'if [ -f config/config.ini.sample ]; then' + LineEnding +
     '    cp config/config.ini.sample config/config.ini' + LineEnding +
     'fi' + LineEnding +
+    'if [ -f build.global.prod.cfg.sample ]; then' + LineEnding +
+    '    cp build.global.prod.cfg.sample build.global.prod.cfg' + LineEnding +
+    'fi' + LineEnding +
+    'if [ -f build.prodwpo.cfg.sample ]; then' + LineEnding +
+    '    cp build.prodwpo.cfg.sample build.prodwpo.cfg' + LineEnding +
+    'fi' + LineEnding +
     'cp build.prod.cfg.sample build.prod.cfg' + LineEnding +
     'cp build.dev.cfg.sample build.dev.cfg' + LineEnding +
     'cp build.cfg.sample build.cfg';

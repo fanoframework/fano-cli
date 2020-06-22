@@ -53,7 +53,9 @@ uses
     DirectoryCreatorImpl,
     CreateDirTaskImpl,
     CreateAdditionalFilesTaskImpl,
+    CompositeWpoTaskImpl,
     CreateShellScriptsTaskImpl,
+    CreateWpoShellScriptsTaskImpl,
     InitGitRepoTaskImpl,
     CommitGitRepoTaskImpl,
     CreateProjectTaskImpl,
@@ -86,7 +88,10 @@ uses
     begin
         result := TCreateProjectTask.create(
             TCreateDirTask.create(TDirectoryCreator.create()),
-            TCreateShellScriptsTask.create(textFileCreator, contentModifier),
+            TCompositeWpoTask.create(
+                TCreateWpoShellScriptsTask.create(textFileCreator, contentModifier),
+                TCreateShellScriptsTask.create(textFileCreator, contentModifier)
+            ),
             fProjectDepTaskFactory.build(),
             TCreateAdditionalFilesTask.create(textFileCreator, contentModifier),
             fBootstrapTaskFactory.build(),

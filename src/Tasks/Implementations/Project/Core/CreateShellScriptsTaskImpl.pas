@@ -30,11 +30,12 @@ type
      *---------------------------------------*)
     TCreateShellScriptsTask = class(TCreateFileTask)
     private
-        fExecBinOutput : string;
-        procedure createShellScripts(const dir : string);
         procedure createCleanScripts(const dir : string);
         procedure createConfigSetupScripts(const dir : string);
         procedure createSimulateScripts(const dir : string);
+    protected
+        fExecBinOutput : string;
+        procedure createShellScripts(const dir : string); virtual;
     public
         constructor create(
             const txtFileCreator : ITextFileCreator;
