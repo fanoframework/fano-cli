@@ -32,26 +32,27 @@ type
      * @author Zamrony P. Juhara <zamronypj@yahoo.com>
      *---------------------------------------*)
     TNamedCompositeTask = class abstract (TInterfacedObject, ITask)
-    private
-        fTasks : TNamedTaskArr;
     protected
+        fTasks : TNamedTaskArr;
+
         (*!--------------------------------------
-        * get task name
-        *---------------------------------------------
-        * @param opt current task options
-        * @param longOpt current long option name
-        * @return task name string
-        *---------------------------------------*)
+         * get task name
+         *---------------------------------------------
+         * @param opt current task options
+         * @param longOpt current long option name
+         * @return task name string
+         *---------------------------------------*)
         function getTaskName(
             const opt : ITaskOptions;
             const longOpt : shortstring
         ) : shortstring; virtual; abstract;
     public
         constructor create(const atasks : TNamedTaskArr);
+
         function run(
             const opt : ITaskOptions;
             const longOpt : shortstring
-        ) : ITask;
+        ) : ITask; virtual;
     end;
 
 implementation

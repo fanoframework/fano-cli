@@ -17,3 +17,5 @@ CreateAppBootstrapFcgiTaskFactoryImpl,
 CreateAppBootstrapFcgidTaskFactoryImpl,
 CreateAppBootstrapUwsgiTaskFactoryImpl,
 CreateAppBootstrapMhdTaskFactoryImpl,
+
+CreateCompleteProjectTaskFactoryImpl,
