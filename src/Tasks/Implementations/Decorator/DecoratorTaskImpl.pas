@@ -26,7 +26,7 @@ type
      *---------------------------------------*)
     TDecoratorTask = class(TInterfacedObject, ITask)
     protected
-        actualTask : ITask;
+        fActualTask : ITask;
     public
         constructor create(const task : ITask);
         destructor destroy(); override;
@@ -41,12 +41,12 @@ implementation
 
     constructor TDecoratorTask.create(const task : ITask);
     begin
-        actualTask := task;
+        fActualTask := task;
     end;
 
     destructor TDecoratorTask.destroy();
     begin
-        actualTask := nil;
+        fActualTask := nil;
         inherited destroy();
     end;
 
@@ -55,7 +55,7 @@ implementation
         const longOpt : shortstring
     ) : ITask;
     begin
-        actualTask.run(opt, longOpt);
+        fActualTask.run(opt, longOpt);
         result := self;
     end;
 end.

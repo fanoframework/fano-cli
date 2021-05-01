@@ -57,7 +57,7 @@ resourcestring
     begin
         if (not inFanoCliGeneratedProjectDir(getCurrentDir() + DirectorySeparator)) then
         begin
-            actualTask.run(opt, longOpt);
+            fActualTask.run(opt, longOpt);
         end else
         begin
             writeln(sFanoDir);

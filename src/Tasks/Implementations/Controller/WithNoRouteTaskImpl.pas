@@ -43,7 +43,7 @@ implementation
     begin
         if not opt.hasOption('no-route') then
         begin
-            actualTask.run(opt, longOpt);
+            fActualTask.run(opt, longOpt);
         end;
         result := self;
     end;

@@ -72,6 +72,6 @@ implementation
             exit();
         end;
 
-        actualTask.run(opt, longOpt);
+        fActualTask.run(opt, longOpt);
     end;
 end.

@@ -66,7 +66,7 @@ implementation
     ) : ITask;
     begin
         fOrigOpts := opt;
-        actualTask.run(self, longOpt);
+        fActualTask.run(self, longOpt);
         result := self;
     end;
 

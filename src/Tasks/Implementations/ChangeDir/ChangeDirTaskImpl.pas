@@ -47,7 +47,7 @@ uses
     ) : ITask;
     var targetDir : string;
     begin
-        actualTask.run(opt, longOpt);
+        fActualTask.run(opt, longOpt);
         if opt.hasOption('cd') then
         begin
             targetDir := getCurrentDir() + '/' + opt.getOptionValue(longOpt);

@@ -90,7 +90,7 @@ resourcestring
         baseDir := opt.getOptionValue(longOpt);
         if ((not directoryExists(baseDir)) or isDirectoryEmpty(baseDir)) then
         begin
-            actualTask.run(opt, longOpt);
+            fActualTask.run(opt, longOpt);
         end else
         begin
             writeln(format(sDirExistsNotEmpty, [formatColor(baseDir, TXT_GREEN)]));
