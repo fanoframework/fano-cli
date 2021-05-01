@@ -66,8 +66,12 @@ implementation
     ) : ITask;
     begin
         fOrigOpts := opt;
-        fActualTask.run(self, longOpt);
-        result := self;
+        try
+            fActualTask.run(self, longOpt);
+            result := self;
+        finally
+            fOrigOpts := nil;
+        end;
     end;
 
     function TWithOptionsDecoratorTask.hasOption(const longOpt: string) : boolean;
