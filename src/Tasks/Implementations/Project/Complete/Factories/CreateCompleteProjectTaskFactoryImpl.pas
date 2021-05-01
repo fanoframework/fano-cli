@@ -15,9 +15,7 @@ interface
 uses
 
     TaskIntf,
-    TaskFactoryIntf,
-    TextFileCreatorIntf,
-    ContentModifierIntf;
+    TaskFactoryIntf;
 
 type
 
@@ -27,7 +25,6 @@ type
      * @author Zamrony P. Juhara <zamronypj@yahoo.com>
      *---------------------------------------*)
     TCreateCompleteProjectTaskFactory = class(TInterfacedObject, ITaskFactory)
-    protected
     public
         function build() : ITask;
     end;
