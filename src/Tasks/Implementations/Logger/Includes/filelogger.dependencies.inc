@@ -5,15 +5,11 @@
  * @copyright Copyright (c) 2018 - 2020 Zamrony P. Juhara
  * @license   https://github.com/fanoframework/fano-cli/blob/master/LICENSE (MIT)
  *------------------------------------------------------------- *)
-strCsrfDependencies : string =
+strLoggerDependencies : string =
     '    container.add(' + LineEnding +
-    '        ''verifyCsrfToken'',' + LineEnding +
-    '        TCsrfMiddlewareFactory.create(' + LineEnding +
-    '            (container[GuidToString(IAppConfiguration)] as IAppConfiguration)' + LineEnding +
-    '                .getString(''secretKey'')' + LineEnding +
+    '        ''logger'',' + LineEnding +
+    '        TFileLoggerFactory.create(' + LineEnding +
+    '            [[BASE_DIR]] + ''/storages/logs/app.log''' + LineEnding +
     '        )' + LineEnding +
     '    );' + LineEnding +
-    '' + LineEnding +
-    '    (container[''appMiddlewares''] as IMiddlewareList)' + LineEnding +
-    '        .add(container[''verifyCsrfToken''] as IMiddleware);' + LineEnding +
     '' + LineEnding;
