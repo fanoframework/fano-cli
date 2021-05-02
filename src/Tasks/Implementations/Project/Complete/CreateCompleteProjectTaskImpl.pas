@@ -45,7 +45,8 @@ implementation
             (longOpt = 'with-middleware') or
             (longOpt = 'config') or
             (longOpt = 'with-session') or
-            (longOpt = 'with-csrf');
+            (longOpt = 'with-csrf') or
+            (longOpt = 'with-logger');
     end;
 
     function TCreateCompleteProjectTask.isSupportedProject(const longOpt : string) : boolean;
