@@ -12,7 +12,7 @@ taskFactory := TCreateModelTaskFactory.create();
 try
     appInst.registerTask(
         'model',
-        '--model=[model-name] Create new model',
+        formatColor('--model', TXT_GREEN) + '=[model-name] Create new model',
         taskFactory.build()
     );
 finally

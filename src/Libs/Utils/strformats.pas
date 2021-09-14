@@ -48,6 +48,11 @@ uses
 
     function formatColor(const astr : string; const col: byte) : string;
     begin
+        {$IFDEF WINDOWS}
+        //do nothing on Windows
+        result := astr;
+        {$ELSE}
         result := format(#27'[1;%dm%s'#27'[0m', [col, astr]);
+        {$ENDIF}
     end;
 end.

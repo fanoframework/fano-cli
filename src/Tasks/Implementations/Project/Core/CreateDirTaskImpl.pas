@@ -84,6 +84,7 @@ uses
         createDirIfNotExists('storages/logs');
         createDirIfNotExists('storages/sessions');
         createDirIfNotExists('bin');
+        createDirIfNotExists('bin/out');
         createDirIfNotExists('bin/unit');
         createDirIfNotExists('tools');
         createDirIfNotExists('vendor');

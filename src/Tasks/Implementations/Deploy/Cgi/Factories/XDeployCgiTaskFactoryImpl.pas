@@ -17,7 +17,8 @@ uses
     TaskIntf,
     TaskFactoryIntf,
     TextFileCreatorIntf,
-    DirectoryExistsIntf;
+    DirectoryExistsIntf,
+    AbstractDeployTaskFactoryImpl;
 
 type
 
@@ -26,16 +27,16 @@ type
      *
      * @author Zamrony P. Juhara <zamronypj@yahoo.com>
      *---------------------------------------*)
-    TXDeployCgiTaskFactory = class(TInterfacedObject, ITaskFactory)
+    TXDeployCgiTaskFactory = class(TAbstractDeployTaskFactory)
     private
         function buildApacheCgiVhostTask(
-            ftext : ITextFileCreator;
+            atxtFileCreator : ITextFileCreator;
             aDirExists : IDirectoryExists
         ) : ITask;
         function buildStdoutApacheCgiVhostTask() : ITask;
         function buildNormalApacheCgiVhostTask() : ITask;
     public
-        function build() : ITask;
+        function build() : ITask; override;
     end;
 
 implementation
@@ -58,29 +59,24 @@ uses
     DirectoryCreatorImpl,
     ContentModifierImpl,
     FileHelperImpl,
+    FileHelperAppendImpl,
     VirtualHostWriterIntf,
     WebServerVirtualHostTaskImpl,
     VirtualHostImpl,
     VirtualHostWriterImpl,
-    ApacheDebianVHostWriterImpl,
-    ApacheFedoraVHostWriterImpl,
-    ApacheFreeBsdVHostWriterImpl,
+
     ApacheVHostCgiTplImpl,
     StdoutCheckTaskImpl,
     DirectoryExistsImpl,
     NullDirectoryExistsImpl;
 
     function TXDeployCgiTaskFactory.buildApacheCgiVhostTask(
-        ftext : ITextFileCreator;
+        atxtFileCreator : ITextFileCreator;
         adirExists : IDirectoryExists
     ) : ITask;
     var vhostWriter : IVirtualHostWriter;
     begin
-        vhostWriter := (TVirtualHostWriter.create(aDirExists))
-            .addWriter('/etc/apache2', TApacheDebianVHostWriter.create(ftext))
-            .addWriter('/etc/httpd', TApacheFedoraVHostWriter.create(ftext))
-            .addWriter('/usr/local/etc/apache24', TApacheFreeBsdVHostWriter.create(ftext, 'apache24'))
-            .addWriter('/usr/local/etc/apache25', TApacheFreeBsdVHostWriter.create(ftext, 'apache25'));
+        vhostWriter := buildApacheVirtualHostWriter(atxtFileCreator, aDirExists);
 
         result := TWebServerVirtualHostTask.create(
             TVirtualHost.create(),

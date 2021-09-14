@@ -15,11 +15,12 @@ taskFactory := TCreateProjectTaskFactory.create(
 try
     appInst.registerTask(
         'project-cgi',
-        '--project-cgi=[project-name] Create new CGI project.' + LineEnding +
+        formatColor('--project-cgi', TXT_GREEN) + '=[project-name] Create new CGI project.' + LineEnding +
         '     --config=[json, ini] Type of generated application config. If omitted, json is assumed.' + LineEnding +
         '     --with-session=[file, cookie, db] Add session support' + LineEnding +
         '     --with-middleware Add middleware support' + LineEnding +
         '     --with-csrf Add CSRF support' + LineEnding +
+        '     --with-logger=[file, db, syslog] Add logger dependencies' + LineEnding +
         '     --no-git if omitted, git repository is created.' + LineEnding +
         '     --no-initial-commit if omitted, git repository is created with initial commit.',
         taskFactory.build()

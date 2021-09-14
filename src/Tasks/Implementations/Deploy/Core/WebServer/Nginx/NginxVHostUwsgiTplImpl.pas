@@ -21,7 +21,7 @@ uses
 type
 
     (*!--------------------------------------
-     * Task that creates ninx virtual host template
+     * Task that creates nginx virtual host template
      * for uwsgi web application
      *------------------------------------------
      * @author Zamrony P. Juhara <zamronypj@yahoo.com>

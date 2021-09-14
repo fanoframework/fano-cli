@@ -45,7 +45,7 @@ uses
 
     function TVirtualHost.getDocumentRoot(const opt : ITaskOptions; const longOpt : shortstring) : string;
     begin
-        result := opt.getOptionValueDef('doc-root', getCurrentDir() + '/public');
+        result := opt.getOptionValueDef('doc-root', getCurrentDir() + DirectorySeparator + 'public');
     end;
 
     function TVirtualHost.getHost(const opt : ITaskOptions; const longOpt : shortstring) : string;

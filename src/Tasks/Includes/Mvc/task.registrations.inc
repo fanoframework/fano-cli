@@ -12,7 +12,7 @@ taskFactory := TCreateMvcTaskFactory.create();
 try
     appInst.registerTask(
         'mvc',
-        '--mvc=[name] Create new controller, model and view',
+        formatColor('--mvc', TXT_GREEN) + '=[name] Create new controller, model and view',
         taskFactory.build()
     );
 finally

@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2018 - 2020 Zamrony P. Juhara
  * @license   https://github.com/fanoframework/fano-cli/blob/master/LICENSE (MIT)
  *------------------------------------------------------------- *)
-unit StageRepoTaskImpl;
+unit WithSingleInfoTaskImpl;
 
 interface
 
@@ -16,44 +16,31 @@ uses
 
     TaskOptionsIntf,
     TaskIntf,
-    BaseGitRepoTaskImpl;
+    ConditionalCompositeTaskImpl;
 
 type
 
     (*!--------------------------------------
-     * Task that stage new files so it is
-     * ready for commit
-     *
+     * Task that execute first task if --task
+     * is set, otherwise run second task
+     *---------------------------------------------
      * @author Zamrony P. Juhara <zamronypj@yahoo.com>
      *---------------------------------------*)
-    TStageRepoTask = class(TBaseGitRepoTask)
-    public
-        function run(
+    TWithSingleInfoTask = class(TConditionalCompositeTask)
+    protected
+        function condition(
             const opt : ITaskOptions;
             const longOpt : shortstring
-        ) : ITask; override;
+        ) : boolean; override;
     end;
 
 implementation
 
-uses
-
-    sysutils;
-
-    function TStageRepoTask.run(
+    function TWithSingleInfoTask.condition(
         const opt : ITaskOptions;
         const longOpt : shortstring
-    ) : ITask;
-    var outputString : string;
+    ) : boolean;
     begin
-        //need to call parent run() so baseDirectory can be initialized
-        inherited run(opt, longOpt);
-
-        // following line equals calling following command on shell
-        // $ git add .
-        runGit(baseDirectory, ['add', '.'], outputString);
-        writeln(outputString);
-
-        result := self;
+        result := opt.hasOption('task');
     end;
 end.

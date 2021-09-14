@@ -12,7 +12,7 @@ taskFactory := TSystemDDaemonTaskFactory.create();
 try
     appInst.registerTask(
         'daemon-sysd',
-        '--daemon-sysd=[service name] Register daemon as service in SystemD.' + LineEnding +
+        formatColor('--daemon-sysd', TXT_GREEN) + '=[service name] Register daemon as service in SystemD.' + LineEnding +
         '     --user=[username] User whose service will be run as. If not set, current non-root user is used.' + LineEnding +
         '     --bin=[application binary] Path of executable binary. If not set then, default bin/app.cgi is used.',
         taskFactory.build()

@@ -10,7 +10,7 @@
 
 appInst.registerTask(
     'txt2inc',
-    '--txt2inc Generate Pascal string variable declaration from file string.' + LineEnding +
+    formatColor('--txt2inc', TXT_GREEN) + ' Generate Pascal string variable declaration from file string.' + LineEnding +
     '     --src=[source file path] if omitted, STDIN is used.' + LineEnding +
     '     --dst=[destination file path]' + LineEnding +
     '           if omitted and --src is set, use --src file path concatenated with inc extension' + LineEnding +

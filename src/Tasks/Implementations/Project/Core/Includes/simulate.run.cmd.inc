@@ -6,17 +6,18 @@
  * @license   https://github.com/fanoframework/fano-cli/blob/master/LICENSE (MIT)
  *------------------------------------------------------------- *)
 strSimulateCmd: string =
-    'REM------------------------------------------------------------' + LineEnding +
+    '@echo off' + LineEnding +
+    'REM ------------------------------------------------------------' + LineEnding +
     'REM [[APP_NAME]] ([[APP_URL]])' + LineEnding +
     'REM' + LineEnding +
     'REM @link      [[APP_REPOSITORY_URL]]' + LineEnding +
     'REM @copyright Copyright (c) [[COPYRIGHT_YEAR]] [[COPYRIGHT_HOLDER]]' + LineEnding +
     'REM @license   [[LICENSE_URL]] ([[LICENSE]])' + LineEnding +
-    'REM-------------------------------------------------------------' + LineEnding +
+    'REM -------------------------------------------------------------' + LineEnding +
     '' + LineEnding +
-    'REM------------------------------------------------------' + LineEnding +
+    'REM ------------------------------------------------------' + LineEnding +
     'REM Scripts to simulate run CGI app in shell for Windows' + LineEnding +
-    'REM------------------------------------------------------' + LineEnding +
+    'REM ------------------------------------------------------' + LineEnding +
     '' + LineEnding +
     'SET %CURRDIR%=%cd%' + LineEnding +
     '' + LineEnding +
@@ -24,8 +25,8 @@ strSimulateCmd: string =
     'REM app executed by web server' + LineEnding +
     'cd public' + LineEnding +
     '' + LineEnding +
-    'IF NOT DEFINED REQUEST_METHOD (SET REQUEST_METHOD="GET")' + LineEnding +
-    'IF NOT DEFINED REQUEST_URI (SET REQUEST_URI="/")' + LineEnding +
+    'IF NOT DEFINED REQUEST_METHOD (SET REQUEST_METHOD=GET)' + LineEnding +
+    'IF NOT DEFINED REQUEST_URI (SET REQUEST_URI=/)' + LineEnding +
     '' + LineEnding +
     'app.cgi' + LineEnding +
     '' + LineEnding +

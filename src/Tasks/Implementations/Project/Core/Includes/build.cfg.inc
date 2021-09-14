@@ -24,7 +24,8 @@ strBuildCfg: string =
     '#----------------------------------------------' + LineEnding +
     '# Target OS' + LineEnding +
     '# linux : Linux' + LineEnding +
-    '# win64 : Windows (not tested yet)' + LineEnding +
+    '# win64 : Windows 64-bit' + LineEnding +
+    '# win32 : Windows 32-bit' + LineEnding +
     '# freebsd : FreeBSD' + LineEnding +
     '#----------------------------------------------' + LineEnding +
     '-Tlinux' + LineEnding +
@@ -49,6 +50,7 @@ strBuildCfg: string =
     '#----------------------------------------------' + LineEnding +
     '-Fu$USER_APP_DIR$/Dependencies' + LineEnding +
     '-Fu$USER_APP_DIR$/Routes' + LineEnding +
+    '-Fu$USER_APP_DIR$/App' + LineEnding +
     '#-Fu$USER_APP_DIR$/path/to/other/units' + LineEnding +
     '#-Fu$USER_APP_DIR$/path/to/other/units' + LineEnding +
     '' + LineEnding +

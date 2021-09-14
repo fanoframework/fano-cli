@@ -9,7 +9,7 @@ Fano CLI is command line tools to help scaffolding web application using [Fano W
 
 ## Requirement
 
-- Linux or FreeBSD
+- Linux or FreeBSD or Windows
 - [Free Pascal](https://www.freepascal.org/) >= 3.0,
 - git
 
@@ -30,6 +30,7 @@ For easier access, copy `bin/out/fanocli` executable binary to globally accessib
 ```
 $ sudo cp bin/out/fanocli /usr/local/bin/fanocli
 ```
+or you can put absolute path of `bin/out` directory in `PATH` environment variable.
 
 In FreeBSD, before you run `build.sh`, edit `build.cfg` and replace target OS compilation to `-Tfreebsd`.
 
@@ -105,6 +106,20 @@ environment variable. By default is `bin/unit` directory.
 
     $ UNIT_OUTPUT_DIR=/path/to/compiled/units/dir ./build.sh
 
+## Change Free Pascal compiler binary
+
+By default, build script uses `fpc` command. If `fpc` can not be found or if you want to use different Free Pascal version, you can set compiler binary with `FPC_BIN`
+environment variable. By default it is `fpc`.
+
+    $ FPC_BIN=/path/to/fpc ./build.sh
+
+You will very likely need to set location of `fpc.cfg` file to match Free Pascal version. For example, if you have multiple version of Free Pascal installation and you want to compile using Free Pascal version 3.0.4 as shown in following command.
+
+```
+$ PPC_CONFIG_PATH=/path/to/fpc-3.0.4 FPC_BIN=/path/to/fpc-3.0.4/fpc ./build.sh
+```
+where `PPC_CONFIG_PATH` is environment variable which Free Pascal uses to look for `fpc.cfg` file for Free Pascal version 3.0.4.
+
 ## Run
 
 Copy `bin/out/fanocli` executable file to directory that is accessible globally, for example `/usr/local/bin`,
@@ -140,13 +155,13 @@ When running `build.sh` script, you may encounter following warning:
 ```
 
 This is known issue between Free Pascal and GNU Linker. See
-[FAQ: link.res syntax error, or "did you forget -T?"](https://www.freepascal.org/faq.var#unix-ld219)
+[FAQ: link.res syntax error, or "did you forget -T?"](https://www.freepascal.org/faq.var#unix-ld219) and only happens with Free Pascal 3.0.4 or older. Free Pascal 3.2.0 or newer does not have this issue.
 
 However, this warning is minor and can be ignored. It does not affect output executable.
 
 ### Missing /etc/fpc.cfg
 
-`build.sh` script may show error about missing `/etc/fpc.cfg` file. This may happen if you install Free Pascal in non default directory or using tools such as [fpcupdeluxe](https://github.com/LongDirtyAnimAlf/fpcupdeluxe). To remedy this situation, create symbolic link in `/etc` to actual `fpc.cfg` file.
+`build.sh` script may show error about missing `/etc/fpc.cfg` file. This may happen if you install Free Pascal in non default directory or using tools such as [fpcupdeluxe](https://github.com/LongDirtyAnimAlf/fpcupdeluxe). To remedy this situation, create symbolic link in `/etc` to actual `fpc.cfg` file. Alternatively you can set `PPC_CONFIG_PATH` environment variable as described above.
 
 ```
 $ sudo ln -s ~/fpcupdeluxe/fpc/bin/x86_64-linux/fpc.cfg /etc/fpc.cfg

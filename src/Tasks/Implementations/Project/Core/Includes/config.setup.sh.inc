@@ -28,6 +28,7 @@ strConfigSetupSh: string =
     'cp build.prod.cfg.sample build.prod.cfg' + LineEnding +
     'cp build.dev.cfg.sample build.dev.cfg' + LineEnding +
     'cp build.cfg.sample build.cfg' + LineEnding +
+    'cp defines.cfg.sample defines.cfg' + LineEnding +
     '' + LineEnding +
     '#------------------------------------------------------' + LineEnding +
     '# Replace target compilation based on platform' + LineEnding +

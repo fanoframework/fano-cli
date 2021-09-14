@@ -12,7 +12,7 @@ taskFactory := TCreateControllerTaskFactory.create();
 try
     appInst.registerTask(
         'controller',
-        '--controller=[controller-name] Create new controller' + LineEnding +
+        formatColor('--controller', TXT_GREEN) + '=[controller-name] Create new controller' + LineEnding +
         '     --route=[route pattern] if omitted, controller name is assumed.' + LineEnding +
         '     --method=[request method] if omitted, HTTP GET is assumed.',
         taskFactory.build()
