@@ -67,7 +67,7 @@ implementation
     begin
         fOrigOpts := opt;
         try
-            actualTask.run(self, longOpt);
+            fActualTask.run(self, longOpt);
             result := self;
         finally
             fOrigOpts := nil;

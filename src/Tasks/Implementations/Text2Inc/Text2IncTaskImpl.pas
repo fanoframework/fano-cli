@@ -63,7 +63,7 @@ uses
         MyStream: TStringStream;
         InputStream: TIOStream;
     begin
-        MyStream := TStringStream.Create;
+        MyStream := TStringStream.Create('');
         try
             InputStream := TIOStream.Create(iosInput);
             try

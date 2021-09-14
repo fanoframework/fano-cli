@@ -50,18 +50,18 @@ uses
         if (longOpt = 'project-mhd') then
         begin
             fWriter.write(
-                baseDirectory + '/build.cfg',
+                baseDirectory + '/defines.cfg',
                 StringReplace(
-                    fReader.read(baseDirectory + '/build.cfg'),
+                    fReader.read(baseDirectory + '/defines.cfg'),
                     '#-dLIBMICROHTTPD',
                     '-dLIBMICROHTTPD',
                     [rfReplaceAll]
                 )
             );
             fWriter.write(
-                baseDirectory + '/build.cfg.sample',
+                baseDirectory + '/defines.cfg.sample',
                 StringReplace(
-                    fReader.read(baseDirectory + '/build.cfg.sample'),
+                    fReader.read(baseDirectory + '/defines.cfg.sample'),
                     '#-dLIBMICROHTTPD',
                     '-dLIBMICROHTTPD',
                     [rfReplaceAll]

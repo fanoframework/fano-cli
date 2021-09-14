@@ -45,6 +45,7 @@ uses
 
     procedure TCreateAdditionalFilesTask.createAdditionalFiles(const dir : string);
     var
+        {$INCLUDE src/Tasks/Implementations/Project/Core/Includes/env.inc}
         {$INCLUDE src/Tasks/Implementations/Project/Core/Includes/gitignore.inc}
         {$INCLUDE src/Tasks/Implementations/Project/Core/Includes/htaccess.example.inc}
     begin
@@ -53,6 +54,8 @@ uses
         createTextFile(dir + '/public/.htaccess', strHtaccessExampleInc);
         createTextFile(dir + '/bin/README.md', '# directory for binary output');
         createTextFile(dir + '/bin/unit/README.md', '# directory for compiled units');
+        createTextFile(dir + '/.env', strEnv);
+        createTextFile(dir + '/env.sample', strEnv);
     end;
 
     function TCreateAdditionalFilesTask.run(

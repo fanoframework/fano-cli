@@ -61,7 +61,8 @@ uses
     procedure TApacheFreeBsdVHostWriter.writeVhost(
         const serverName : string;
         const vhostTpl : string;
-        const cntModifier : IContentModifier);
+        const cntModifier : IContentModifier
+    );
     begin
         cntModifier.setVar('[[APACHE_LOG_DIR]]', '/var/log');
         fTextFileCreator.createTextFile(

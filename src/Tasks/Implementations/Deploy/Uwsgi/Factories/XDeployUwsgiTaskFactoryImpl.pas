@@ -17,7 +17,8 @@ uses
     TaskIntf,
     TaskFactoryIntf,
     TextFileCreatorIntf,
-    DirectoryExistsIntf;
+    DirectoryExistsIntf,
+    AbstractDeployTaskFactoryImpl;
 
 type
 
@@ -26,22 +27,22 @@ type
      *
      * @author Zamrony P. Juhara <zamronypj@yahoo.com>
      *---------------------------------------*)
-    TXDeployUwsgiTaskFactory = class(TInterfacedObject, ITaskFactory)
+    TXDeployUwsgiTaskFactory = class(TAbstractDeployTaskFactory)
     private
         function buildApacheUwsgiVhostTask(
-            ftext : ITextFileCreator;
+            atxtFileCreator : ITextFileCreator;
             aDirExists : IDirectoryExists
         ) : ITask;
         function buildStdoutApacheUwsgiVhostTask() : ITask;
         function buildNormalApacheUwsgiVhostTask() : ITask;
         function buildNginxUwsgiVhostTask(
-            ftext : ITextFileCreator;
+            atxtFileCreator : ITextFileCreator;
             aDirExists : IDirectoryExists
         ) : ITask;
         function buildStdoutNginxUwsgiVhostTask() : ITask;
         function buildNormalNginxUwsgiVhostTask() : ITask;
     public
-        function build() : ITask;
+        function build() : ITask; override;
     end;
 
 implementation
@@ -69,28 +70,19 @@ uses
     WebServerVirtualHostTaskImpl,
     VirtualHostImpl,
     VirtualHostWriterImpl,
-    ApacheDebianVHostWriterImpl,
-    ApacheFedoraVHostWriterImpl,
-    ApacheFreeBsdVHostWriterImpl,
     ApacheVHostUwsgiTplImpl,
-    NginxLinuxVHostWriterImpl,
-    NginxFreeBsdVHostWriterImpl,
     NginxVHostUwsgiTplImpl,
     StdoutCheckTaskImpl,
     DirectoryExistsImpl,
     NullDirectoryExistsImpl;
 
     function TXDeployUwsgiTaskFactory.buildApacheUwsgiVhostTask(
-        ftext : ITextFileCreator;
+        atxtFileCreator : ITextFileCreator;
         adirExists : IDirectoryExists
     ) : ITask;
     var vhostWriter : IVirtualHostWriter;
     begin
-        vhostWriter := (TVirtualHostWriter.create(aDirExists))
-            .addWriter('/etc/apache2', TApacheDebianVHostWriter.create(ftext))
-            .addWriter('/etc/httpd', TApacheFedoraVHostWriter.create(ftext))
-            .addWriter('/usr/local/etc/apache24', TApacheFreeBsdVHostWriter.create(ftext, 'apache24'))
-            .addWriter('/usr/local/etc/apache25', TApacheFreeBsdVHostWriter.create(ftext, 'apache25'));
+        vhostWriter := buildApacheVirtualHostWriter(atxtFileCreator, aDirExists);
 
         result := TWebServerVirtualHostTask.create(
             TVirtualHost.create(),
@@ -117,14 +109,12 @@ uses
     end;
 
     function TXDeployUwsgiTaskFactory.buildNginxUwsgiVhostTask(
-        ftext : ITextFileCreator;
+        atxtFileCreator : ITextFileCreator;
         aDirExists : IDirectoryExists
     ) : ITask;
     var vhostWriter : IVirtualHostWriter;
     begin
-        vhostWriter := (TVirtualHostWriter.create(aDirExists))
-            .addWriter('/etc/nginx', TNginxLinuxVHostWriter.create(ftext))
-            .addWriter('/usr/local/etc/nginx', TNginxFreeBsdVHostWriter.create(ftext));
+        vhostWriter := buildNginxVirtualHostWriter(atxtFileCreator, aDirExists);
 
         result := TWebServerVirtualHostTask.create(
             TVirtualHost.create(),

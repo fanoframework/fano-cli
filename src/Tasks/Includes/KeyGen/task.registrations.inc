@@ -12,7 +12,7 @@ taskFactory := TKeyGenTaskFactory.create();
 try
     appInst.registerTask(
         'key',
-        '--key=[length] Generate random key.',
+        formatColor('--key', TXT_GREEN) + '=[length] Generate random key.',
         taskFactory.build()
     );
 finally

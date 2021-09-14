@@ -15,13 +15,14 @@ taskFactory := TCreateDaemonProjectTaskFactory.create(
 try
     appInst.registerTask(
         'project-scgi',
-        '--project-scgi=[project-name] Create new SCGI project' + LineEnding +
+        formatColor('--project-scgi', TXT_GREEN) + '=[project-name] Create new SCGI project' + LineEnding +
         '     --config=[ini, json] if omitted, config is not setup.' + LineEnding +
         '     --host=[host where SCGI app listen] if omitted, 127.0.0.1 is assumed.' + LineEnding +
         '     --port=[port where SCGI app listen] if omitted, 20477 is assumed.' + LineEnding +
         '     --with-session=[file, cookie, db] Add session support' + LineEnding +
         '     --with-middleware Add middleware support' + LineEnding +
         '     --with-csrf Add CSRF support' + LineEnding +
+        '     --with-logger=[file, db, syslog] Add logger dependencies' + LineEnding +
         '     --no-git if omitted, git repository is created.' + LineEnding +
         '     --no-initial-commit if omitted, git repository is created with initial commit.',
         taskFactory.build()

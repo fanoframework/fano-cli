@@ -7,5 +7,6 @@
  *------------------------------------------------------------- *)
 
 {$INCLUDE Apps/Includes/units.inc}
+{$INCLUDE Libs/Includes/units.inc}
 {$INCLUDE Tasks/Includes/contracts.inc}
 {$INCLUDE Tasks/Includes/units.inc}

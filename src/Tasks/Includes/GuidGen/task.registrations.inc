@@ -10,6 +10,6 @@
 
 appInst.registerTask(
     'guid',
-    '--guid Generate GUID.',
+    formatColor('--guid', TXT_GREEN) + ' Generate GUID.',
     TGuidGenTask.create()
 );

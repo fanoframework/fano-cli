@@ -17,7 +17,8 @@ uses
     TaskIntf,
     TaskFactoryIntf,
     TextFileCreatorIntf,
-    DirectoryExistsIntf;
+    DirectoryExistsIntf,
+    AbstractDeployTaskFactoryImpl;
 
 type
 
@@ -27,16 +28,16 @@ type
      *
      * @author Zamrony P. Juhara <zamronypj@yahoo.com>
      *---------------------------------------*)
-    TXDeployBalancerTaskFactory = class(TInterfacedObject, ITaskFactory)
+    TXDeployBalancerTaskFactory = class abstract (TAbstractDeployTaskFactory)
     private
         function buildApacheBalancerVhostTask(
-            ftext : ITextFileCreator;
+            atxtFileCreator : ITextFileCreator;
             aDirExists : IDirectoryExists
         ) : ITask;
         function buildStdoutApacheBalancerVhostTask() : ITask;
         function buildNormalApacheBalancerVhostTask() : ITask;
         function buildNginxBalancerVhostTask(
-            ftext : ITextFileCreator;
+            atxtFileCreator : ITextFileCreator;
             aDirExists : IDirectoryExists
         ) : ITask;
         function buildStdoutNginxBalancerVhostTask() : ITask;
@@ -47,7 +48,7 @@ type
         function getProxyParams() : shortstring; virtual; abstract;
         function getServerPrefix() : shortstring; virtual;
     public
-        function build() : ITask;
+        function build() : ITask; override;
     end;
 
 implementation
@@ -71,6 +72,7 @@ uses
     DirectoryCreatorImpl,
     ContentModifierImpl,
     FileHelperImpl,
+    FileHelperAppendImpl,
     BaseCreateFileTaskImpl,
     CreateFileConsts,
     VirtualHostIntf,
@@ -78,31 +80,21 @@ uses
     WebServerVirtualHostTaskImpl,
     VirtualHostImpl,
     VirtualHostWriterImpl,
-    ApacheDebianVHostWriterImpl,
-    ApacheFedoraVHostWriterImpl,
-    ApacheFreeBsdVHostWriterImpl,
     ApacheVHostBalancerTplImpl,
-    NginxLinuxVHostWriterImpl,
-    NginxFreeBsdVHostWriterImpl,
     NginxVHostBalancerTplImpl,
     StdoutCheckTaskImpl,
     DirectoryExistsImpl,
     NullDirectoryExistsImpl;
 
     function TXDeployBalancerTaskFactory.buildApacheBalancerVhostTask(
-        ftext : ITextFileCreator;
+        atxtFileCreator : ITextFileCreator;
         adirExists : IDirectoryExists
     ) : ITask;
     var vhostWriter : IVirtualHostWriter;
         vhost : IVirtualHost;
     begin
-        vhostWriter := (TVirtualHostWriter.create(aDirExists))
-            .addWriter('/etc/apache2', TApacheDebianVHostWriter.create(ftext))
-            .addWriter('/etc/httpd', TApacheFedoraVHostWriter.create(ftext))
-            .addWriter('/usr/local/etc/apache24', TApacheFreeBsdVHostWriter.create(ftext, 'apache24'))
-            .addWriter('/usr/local/etc/apache25', TApacheFreeBsdVHostWriter.create(ftext, 'apache25'));
-
         vhost := TVirtualHost.create();
+        vhostWriter := buildApacheVirtualHostWriter(atxtFileCreator, aDirExists);
         result := TWebServerVirtualHostTask.create(
             vhost,
             TApacheVHostBalancerTpl.create(vhost, getProtocol()),
@@ -128,16 +120,13 @@ uses
     end;
 
     function TXDeployBalancerTaskFactory.buildNginxBalancerVhostTask(
-        ftext : ITextFileCreator;
+        atxtFileCreator : ITextFileCreator;
         aDirExists : IDirectoryExists
     ) : ITask;
     var vhostWriter : IVirtualHostWriter;
         vhost : IVirtualHost;
     begin
-        vhostWriter := (TVirtualHostWriter.create(aDirExists))
-            .addWriter('/etc/nginx', TNginxLinuxVHostWriter.create(ftext))
-            .addWriter('/usr/local/etc/nginx', TNginxFreeBsdVHostWriter.create(ftext));
-
+        vhostWriter := buildNginxVirtualHostWriter(atxtFileCreator, aDirExists);
         vhost := TVirtualHost.create();
         result := TWebServerVirtualHostTask.create(
             vhost,

@@ -6,7 +6,7 @@
  * @license   https://github.com/fanoframework/fano-cli/blob/master/LICENSE (MIT)
  *------------------------------------------------------------- *)
 strCsrfDependencies : string =
-    '   container.add(' + LineEnding +
+    '    container.add(' + LineEnding +
     '        ''verifyCsrfToken'',' + LineEnding +
     '        TCsrfMiddlewareFactory.create(' + LineEnding +
     '            (container[GuidToString(IAppConfiguration)] as IAppConfiguration)' + LineEnding +

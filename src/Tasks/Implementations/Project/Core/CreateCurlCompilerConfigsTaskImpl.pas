@@ -22,8 +22,8 @@ type
 
     (*!--------------------------------------
      * Task that create web application project
-     * compiler config files and enable conditional 
-     * define -DLIBCURL if current command has 
+     * compiler config files and enable conditional
+     * define -DLIBCURL if current command has
      * --with-curl
      *
      * @author Zamrony P. Juhara <zamronypj@yahoo.com>
@@ -38,7 +38,7 @@ type
 
 implementation
 
-uses 
+uses
 
     SysUtils;
 
@@ -47,14 +47,14 @@ uses
         const longOpt : shortstring
     ) : ITask;
     begin
-        if opt.hasOption('with-curl') then 
+        if opt.hasOption('with-curl') then
         begin
             fWriter.write(
-                baseDirectory + '/build.cfg',
+                baseDirectory + '/defines.cfg',
                 StringReplace(
-                    fReader.read(baseDirectory + '/build.cfg'), 
-                    '#-dLIBCURL', 
-                    '-dLIBCURL', 
+                    fReader.read(baseDirectory + '/defines.cfg'),
+                    '#-dLIBCURL',
+                    '-dLIBCURL',
                     [rfReplaceAll]
                 )
             );

@@ -81,18 +81,24 @@ uses
         const opt : ITaskOptions;
         const longOpt : shortstring
     ) : ITask;
+    {$IFDEF WINDOWS}
+    const ETC_HOSTS_PATH = 'C:\Windows\System32\Drivers\etc\hosts';
+    {$ELSE}
+    const ETC_HOSTS_PATH = '/etc/hosts';
+    {$ENDIF}
     var serverName : string;
         serverIp : string;
         etcHosts : string;
     begin
         serverName := opt.getOptionValue(longOpt);
         serverIp := getIp(opt);
+
         //create domain entry in /etc/hosts
-        etcHosts := fReader.read('/etc/hosts');
+        etcHosts := fReader.read(ETC_HOSTS_PATH);
         etcHosts := etcHosts + LineEnding +
                 serverIp + ' ' + serverName + LineEnding;
-        fWriter.write('/etc/hosts', etcHosts);
-        writeln('Add ', formatColor(serverIp + ' ' + serverName, TXT_GREEN), ' to /etc/hosts ');
+        fWriter.write(ETC_HOSTS_PATH, etcHosts);
+        writeln('Add ', formatColor(serverIp + ' ' + serverName, TXT_GREEN), ' to ' + ETC_HOSTS_PATH);
         result := self;
     end;
 end.

@@ -69,6 +69,12 @@ type
             const contentModifier : IContentModifier
         ) : ITask;
 
+        function buildWithLoggerProjectTask(
+            const prjTask : ITask;
+            const textFileCreator : ITextFileCreator;
+            const contentModifier : IContentModifier
+        ) : ITask;
+
         function buildProjectTask(
             const textFileCreator : ITextFileCreator;
             const contentModifier : IContentModifier
@@ -118,9 +124,16 @@ uses
     PostgresqlDbSessionContentModifierImpl,
     FirebirdDbSessionContentModifierImpl,
     SqliteDbSessionContentModifierImpl,
+
     WithCsrfTaskImpl,
     CreateCsrfMiddlewareDependenciesTaskImpl,
-    ForceConfigSessionDecoratorTaskImpl;
+    ForceConfigSessionDecoratorTaskImpl,
+
+    WithLoggerTaskImpl,
+    CompositeLoggerDependenciesTaskImpl,
+    CreateFileLoggerDependenciesTaskImpl,
+    CreateSyslogLoggerDependenciesTaskImpl,
+    CreateDbLoggerDependenciesTaskImpl;
 
     function TCreateProjectDependenciesTaskFactory.buildCompilerConfigsTask(
         const textFileCreator : ITextFileCreator;
@@ -332,17 +345,62 @@ uses
         );
     end;
 
+    function TCreateProjectDependenciesTaskFactory.buildWithLoggerProjectTask(
+        const prjTask : ITask;
+        const textFileCreator : ITextFileCreator;
+        const contentModifier : IContentModifier
+    ) : ITask;
+    var taskArr : TNamedTaskArr;
+    begin
+        setLength(taskArr, 3);
+
+        taskArr[0].name := 'file';
+        taskArr[0].task := TCreateFileLoggerDependenciesTask.create(
+            textFileCreator,
+            contentModifier,
+            TFileHelperAppender.create()
+        );
+
+        taskArr[1].name := 'syslog';
+        taskArr[1].task := TCreateSyslogLoggerDependenciesTask.create(
+            textFileCreator,
+            contentModifier,
+            TFileHelperAppender.create()
+        );
+
+        taskArr[2].name := 'db';
+        taskArr[2].task := TCreateDbLoggerDependenciesTask.create(
+            textFileCreator,
+            contentModifier,
+            TFileHelperAppender.create()
+        );
+
+        result := TWithLoggerTask.create(
+            TGroupTask.create([
+                prjTask,
+                TCompositeLoggerDependenciesTask.create(taskArr)
+            ]),
+            prjTask
+        );
+    end;
+
     function TCreateProjectDependenciesTaskFactory.buildProjectTask(
         const textFileCreator : ITextFileCreator;
         const contentModifier : IContentModifier
     ) : ITask;
+    var prjTask : ITask;
     begin
-        result := buildWithCsrfProjectTask(
+        prjTask := buildWithCsrfProjectTask(
             TWithSessionOrMiddlewareTask.create(
                 buildSessionProjectTask(textFileCreator, contentModifier),
                 buildMiddlewareProjectTask(textFileCreator, contentModifier),
                 buildBasicProjectTask(textFileCreator, contentModifier)
             ),
+            textFileCreator,
+            contentModifier
+        );
+        result := buildWithLoggerProjectTask(
+            prjTask,
             textFileCreator,
             contentModifier
         );

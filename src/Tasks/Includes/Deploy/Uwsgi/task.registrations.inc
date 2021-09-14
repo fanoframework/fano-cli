@@ -12,7 +12,7 @@ taskFactory := TXDeployUwsgiTaskFactory.create();
 try
     appInst.registerTask(
         'deploy-uwsgi',
-        '--deploy-uwsgi=[server name] Deploy as uwsgi web application.' + LineEnding +
+        formatColor('--deploy-uwsgi', TXT_GREEN) + '=[server name] Deploy as uwsgi web application.' + LineEnding +
         '     --web-server=[web server] if omitted, apache is assumed.' + LineEnding +
         '     --doc-root=[document-root] if omitted, public directory in current directory is used.' + LineEnding +
         '     --server-ip=[web server ip] if omitted, 127.0.0.1 is assumed.' + LineEnding +
