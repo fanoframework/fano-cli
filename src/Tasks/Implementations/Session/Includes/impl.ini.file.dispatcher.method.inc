@@ -21,6 +21,7 @@ strImplIniFileDispatcherMethod : string =
     '                config.getString(''session.dir'')' + LineEnding +
     '            )' + LineEnding +
     '        );' + LineEnding +
+    '        container.alias(GuidToString(ISessionManager), ''sessionManager'');' + LineEnding +
     '' + LineEnding +
     '        container.add(' + LineEnding +
     '            GuidToString(IDispatcher),' + LineEnding +

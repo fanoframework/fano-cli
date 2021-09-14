@@ -20,16 +20,22 @@ strBuildSh: string =
     '#------------------------------------------------------' + LineEnding +
     '' + LineEnding +
     '' + LineEnding +
+    '# if .env file exists, export all variables in this file' + LineEnding +
+    'if [ -f ".env" ]; then' + LineEnding +
+    '    source .env' + LineEnding +
+    '    export $(grep --regexp ^[A-Z] .env | cut -d= -f1)' + LineEnding +
+    'fi' + LineEnding +
+    '' + LineEnding +
     'if [ -z "${FANO_DIR}" ]; then' + LineEnding +
-    'export FANO_DIR="vendor/fano"' + LineEnding +
+    '    export FANO_DIR="vendor/fano"' + LineEnding +
     'fi' + LineEnding +
     '' + LineEnding +
     'if [ -z "${BUILD_TYPE}" ]; then' + LineEnding +
-    'export BUILD_TYPE="prod"' + LineEnding +
+    '    export BUILD_TYPE="prod"' + LineEnding +
     'fi' + LineEnding +
     '' + LineEnding +
     'if [ -z "${USER_APP_DIR}" ]; then' + LineEnding +
-    'export USER_APP_DIR="src"' + LineEnding +
+    '    export USER_APP_DIR="src"' + LineEnding +
     'fi' + LineEnding +
     '' + LineEnding +
     'if [ -z "${UNIT_OUTPUT_DIR}" ]; then' + LineEnding +
@@ -37,19 +43,19 @@ strBuildSh: string =
     'fi' + LineEnding +
     '' + LineEnding +
     'if [ -z "${EXEC_OUTPUT_DIR}" ]; then' + LineEnding +
-    'export EXEC_OUTPUT_DIR="[[EXEC_OUTPUT_DIR]]"' + LineEnding +
+    '    export EXEC_OUTPUT_DIR="[[EXEC_OUTPUT_DIR]]"' + LineEnding +
     'fi' + LineEnding +
     '' + LineEnding +
     'if [ -z "${EXEC_OUTPUT_NAME}" ]; then' + LineEnding +
-    'export EXEC_OUTPUT_NAME="app.cgi"' + LineEnding +
+    '    export EXEC_OUTPUT_NAME="app.cgi"' + LineEnding +
     'fi' + LineEnding +
     '' + LineEnding +
     'if [ -z "${SOURCE_PROGRAM_NAME}" ]; then' + LineEnding +
-    'export SOURCE_PROGRAM_NAME="app.pas"' + LineEnding +
+    '    export SOURCE_PROGRAM_NAME="app.pas"' + LineEnding +
     'fi' + LineEnding +
     '' + LineEnding +
     'if [ -z "${FPC_BIN}" ]; then' + LineEnding +
-    'export FPC_BIN="fpc"' + LineEnding +
+    '    export FPC_BIN="fpc"' + LineEnding +
     'fi' + LineEnding +
     '' + LineEnding +
-    '${FPC_BIN} @vendor/fano/fano.cfg @build.cfg ${USER_APP_DIR}/${SOURCE_PROGRAM_NAME}';
+    '${FPC_BIN} @defines.cfg @vendor/fano/fano.cfg @build.cfg ${USER_APP_DIR}/${SOURCE_PROGRAM_NAME}';

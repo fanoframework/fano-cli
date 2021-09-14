@@ -7,11 +7,12 @@
  *------------------------------------------------------------- *)
 
 {$INCLUDE Deploy/units.inc}
+{$INCLUDE Info/units.inc}
 
-InfoTaskImpl,
 KeyGenTaskImpl,
 KeyGenTaskFactoryImpl,
 GuidGenTaskImpl,
+Text2IncTaskImpl,
 
 {$INCLUDE Project/units.inc}
 

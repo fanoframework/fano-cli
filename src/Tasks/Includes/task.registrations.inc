@@ -20,3 +20,4 @@
 {$INCLUDE Deploy/task.registrations.inc}
 {$INCLUDE Minifier/task.registrations.inc}
 {$INCLUDE Daemon/task.registrations.inc}
+{$INCLUDE Text2Inc/task.registrations.inc}

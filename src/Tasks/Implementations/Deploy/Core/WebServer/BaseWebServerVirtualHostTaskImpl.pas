@@ -53,7 +53,7 @@ uses
         result := opt.getOptionValue('doc-root');
         if result = '' then
         begin
-            result := getCurrentDir() + '/public';
+            result := getCurrentDir() + DirectorySeparator + 'public';
         end;
     end;
 

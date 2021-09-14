@@ -12,14 +12,14 @@ taskFactory := TXDeployHttpBalancerTaskFactory.create();
 try
     appInst.registerTask(
         'deploy-lb-http',
-        '--deploy-lb-http=[server name] Deploy as http web application with mod_proxy_balancer.' + LineEnding +
-        '     --members=[host1:port1,host2:port2,...], if omited, 2 default members is assumed.' + LineEnding +
-        '     --lbmethod=[load balancing scheduler algorithm] if omited, byrequests is assumed.' + LineEnding +
-        '     --web-server=[web server] if omited, apache is assumed.' + LineEnding +
-        '     --doc-root=[document-root] if omited, public directory in current directory is used.' + LineEnding +
-        '     --server-ip=[web server ip] if omited, 127.0.0.1 is assumed.' + LineEnding +
-        '     --host=[host where http app listen] if omited, 127.0.0.1 is assumed.' + LineEnding +
-        '     --port=[port where http app listen] if omited, 20477 is assumed.',
+        formatColor('--deploy-lb-http', TXT_GREEN) + '=[server name] Deploy as http web application with mod_proxy_balancer.' + LineEnding +
+        '     --members=[host1:port1,host2:port2,...], if omitted, 2 default members is assumed.' + LineEnding +
+        '     --lbmethod=[load balancing scheduler algorithm] if omitted, byrequests is assumed.' + LineEnding +
+        '     --web-server=[web server] if omitted, apache is assumed.' + LineEnding +
+        '     --doc-root=[document-root] if omitted, public directory in current directory is used.' + LineEnding +
+        '     --server-ip=[web server ip] if omitted, 127.0.0.1 is assumed.' + LineEnding +
+        '     --host=[host where http app listen] if omitted, 127.0.0.1 is assumed.' + LineEnding +
+        '     --port=[port where http app listen] if omitted, 20477 is assumed.',
         taskFactory.build()
     );
 finally

@@ -16,7 +16,8 @@
 #----------------------------------------------
 # Target OS
 # linux : Linux
-# win64 : Windows (not tested yet)
+# win64 : Windows 64 (not tested yet)
+# win32 : Windows 32 (not tested yet)
 # freebsd : FreeBSD
 #----------------------------------------------
 -Tlinux

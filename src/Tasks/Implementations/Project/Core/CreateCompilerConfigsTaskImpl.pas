@@ -44,6 +44,7 @@ uses
 
     procedure TCreateCompilerConfigsTask.createCompilerConfigs(const dir : string);
     var
+        {$INCLUDE src/Tasks/Implementations/Project/Core/Includes/defines.cfg.inc}
         {$INCLUDE src/Tasks/Implementations/Project/Core/Includes/build.cfg.inc}
         {$INCLUDE src/Tasks/Implementations/Project/Core/Includes/build.dev.cfg.inc}
         {$INCLUDE src/Tasks/Implementations/Project/Core/Includes/build.prod.cfg.inc}
@@ -85,6 +86,9 @@ uses
 
         createTextFile(dir + '/build.prod.cfg', strBuildCfgProd);
         createTextFile(dir + '/build.prod.cfg.sample', strBuildCfgProd);
+
+        createTextFile(dir + '/defines.cfg', strDefinesCfg);
+        createTextFile(dir + '/defines.cfg.sample', strDefinesCfg);
     end;
 
     function TCreateCompilerConfigsTask.run(

@@ -12,12 +12,12 @@ taskFactory := TXDeployFcgiTaskFactory.create();
 try
     appInst.registerTask(
         'deploy-fcgi',
-        '--deploy-fcgi=[server name] Deploy as FastCGI web application with mod_proxy_fcgi.' + LineEnding +
-        '     --web-server=[web server] if omited, apache is assumed.' + LineEnding +
-        '     --doc-root=[document-root] if omited, public directory in current directory is used.' + LineEnding +
-        '     --server-ip=[web server ip] if omited, 127.0.0.1 is assumed.' + LineEnding +
-        '     --host=[host where FastCGI app listen] if omited, 127.0.0.1 is assumed.' + LineEnding +
-        '     --port=[port where FastCGI app listen] if omited, 20477 is assumed.',
+        formatColor('--deploy-fcgi', TXT_GREEN) + '=[server name] Deploy as FastCGI web application with mod_proxy_fcgi.' + LineEnding +
+        '     --web-server=[web server] if omitted, apache is assumed.' + LineEnding +
+        '     --doc-root=[document-root] if omitted, public directory in current directory is used.' + LineEnding +
+        '     --server-ip=[web server ip] if omitted, 127.0.0.1 is assumed.' + LineEnding +
+        '     --host=[host where FastCGI app listen] if omitted, 127.0.0.1 is assumed.' + LineEnding +
+        '     --port=[port where FastCGI app listen] if omitted, 20477 is assumed.',
         taskFactory.build()
     );
 finally

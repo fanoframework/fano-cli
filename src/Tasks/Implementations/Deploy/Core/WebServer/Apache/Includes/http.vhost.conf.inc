@@ -14,8 +14,8 @@ strHttpVhostConf: string =
     '    ServerName [[SERVER_NAME]]' + LineEnding +
     '    ServerAlias *.[[SERVER_NAME]]' + LineEnding +
     '' + LineEnding +
-    '    ErrorLog [[APACHE_LOG_DIR]]/[[SERVER_NAME]]-error.log' + LineEnding +
-    '    CustomLog [[APACHE_LOG_DIR]]/[[SERVER_NAME]]-access.log combined' + LineEnding +
+    '    ErrorLog [[APACHE_LOG_DIR]]' + DirectorySeparator + '[[SERVER_NAME]]-error.log' + LineEnding +
+    '    CustomLog [[APACHE_LOG_DIR]]' + DirectorySeparator + '[[SERVER_NAME]]-access.log combined' + LineEnding +
     '' + LineEnding +
     '    <Directory "[[DOC_ROOT]]">' + LineEnding +
     '        Options -MultiViews -FollowSymlinks +SymlinksIfOwnerMatch +ExecCGI' + LineEnding +
@@ -24,6 +24,6 @@ strHttpVhostConf: string =
     '    </Directory>' + LineEnding +
     '' + LineEnding +
     '    ProxyRequests Off' + LineEnding +
-    '    ProxyPassMatch "/css|js|images|img|plugins|bower_components(.*)" !' + LineEnding +
+    '    ProxyPassMatch "/css|js|images|img|plugins|bower_components(.*)|webfonts" !' + LineEnding +
     '    ProxyPassMatch ^/(.*)$ "http://[[HOST]]:[[PORT]]"' + LineEnding +
     '</VirtualHost>';

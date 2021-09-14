@@ -36,6 +36,11 @@ type
             const textFileCreator : ITextFileCreator;
             const contentModifier : IContentModifier
         ) : ITask;
+
+        function buildWithCsrfAppBootstrap(
+            const prjTask : ITask
+        ) : ITask;
+
     protected
         function buildBootstrapTask(
             const textFileCreator : ITextFileCreator;
@@ -64,7 +69,9 @@ uses
     MysqlDbSessionContentModifierImpl,
     PostgresqlDbSessionContentModifierImpl,
     FirebirdDbSessionContentModifierImpl,
-    SqliteDbSessionContentModifierImpl;
+    SqliteDbSessionContentModifierImpl,
+    WithCsrfTaskImpl,
+    ForceConfigSessionDecoratorTaskImpl;
 
     function TCreateAppBootstrapTaskFactory.buildDbAppBootstrap(
         const textFileCreator : ITextFileCreator;
@@ -145,6 +152,17 @@ uses
         );
     end;
 
+    function TCreateAppBootstrapTaskFactory.buildWithCsrfAppBootstrap(
+        const prjTask : ITask
+    ) : ITask;
+    begin
+        result := TWithCsrfTask.create(
+            //if --with-csrf parameter is set, force add --config and --with-session
+            TForceConfigSessionDecoratorTask.create(prjTask),
+            prjTask
+        );
+    end;
+
     function TCreateAppBootstrapTaskFactory.build() : ITask;
     var textFileCreator : ITextFileCreator;
         contentModifier : IContentModifier;
@@ -154,7 +172,9 @@ uses
             contentModifier := TContentModifier.create();
             try
                 try
-                    result := buildAppBootstrap(textFileCreator, contentModifier);
+                    result := buildWithCsrfAppBootstrap(
+                        buildAppBootstrap(textFileCreator, contentModifier)
+                    );
                 except
                     result := nil;
                 end;

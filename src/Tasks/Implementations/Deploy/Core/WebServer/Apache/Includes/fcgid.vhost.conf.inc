@@ -14,8 +14,8 @@ strFcgidVhostConf: string =
     '    ServerName [[SERVER_NAME]]' + LineEnding +
     '    ServerAlias *.[[SERVER_NAME]]' + LineEnding +
     '' + LineEnding +
-    '    ErrorLog [[APACHE_LOG_DIR]]/[[SERVER_NAME]]-error.log' + LineEnding +
-    '    CustomLog [[APACHE_LOG_DIR]]/[[SERVER_NAME]]-access.log combined' + LineEnding +
+    '    ErrorLog [[APACHE_LOG_DIR]]' + DirectorySeparator + '[[SERVER_NAME]]-error.log' + LineEnding +
+    '    CustomLog [[APACHE_LOG_DIR]]' + DirectorySeparator + '[[SERVER_NAME]]-access.log combined' + LineEnding +
     '' + LineEnding +
     '    <Directory "[[DOC_ROOT]]">' + LineEnding +
     '        Options -MultiViews -FollowSymlinks +SymlinksIfOwnerMatch +ExecCGI' + LineEnding +

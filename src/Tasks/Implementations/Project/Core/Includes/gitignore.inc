@@ -51,6 +51,7 @@ strGitignore: string =
     'build.cfg' + LineEnding +
     'build.dev.cfg' + LineEnding +
     'build.prod.cfg' + LineEnding +
+    'defines.cfg' + LineEnding +
     '' + LineEnding +
     '#----------------------------------------------' + LineEnding +
     '# Ignore all generated compiled units files' + LineEnding +

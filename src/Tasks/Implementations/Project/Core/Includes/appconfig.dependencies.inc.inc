@@ -12,4 +12,5 @@ strAppConfigDependenciesInc: string =
     '                [[BASE_DIR]] + ''[[APP_CONFIG_FILE]]''' + LineEnding +
     '            )' + LineEnding +
     '        );' + LineEnding +
+    '        container.alias(GuidToString(IAppConfiguration), ''config'');' + LineEnding +
     '        result := container[''config''] as IAppConfiguration;' + LineEnding;

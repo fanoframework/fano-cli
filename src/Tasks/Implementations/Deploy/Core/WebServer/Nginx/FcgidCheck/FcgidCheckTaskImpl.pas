@@ -95,7 +95,7 @@ resourcestring
             showInstruction(opt, longOpt);
         end else
         begin
-            actualTask.run(opt, longOpt);
+            fActualTask.run(opt, longOpt);
         end;
         result := self;
     end;

@@ -32,6 +32,7 @@ strImplDbFirebirdDispatcherMethod : string =
     '               .dataColumn(config.getString(''session.dataColumn''))' + LineEnding +
     '               .expiredAtColumn(config.getString(''session.expiredAtColumn''))' + LineEnding +
     '        );' + LineEnding +
+    '        container.alias(GuidToString(ISessionManager), ''sessionManager'');' + LineEnding +
     '' + LineEnding +
     '        container.add(' + LineEnding +
     '            GuidToString(IDispatcher),' + LineEnding +

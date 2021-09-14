@@ -29,6 +29,7 @@ strImplJsonCookieDispatcherMethod : string =
     '                config.getString(''session.name'')' + LineEnding +
     '            )' + LineEnding +
     '        );' + LineEnding +
+    '        container.alias(GuidToString(ISessionManager), ''sessionManager'');' + LineEnding +
     '' + LineEnding +
     '        container.add(' + LineEnding +
     '            GuidToString(IDispatcher),' + LineEnding +

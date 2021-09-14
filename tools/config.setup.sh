@@ -14,3 +14,10 @@
 cp build.prod.cfg.sample build.prod.cfg
 cp build.dev.cfg.sample build.dev.cfg
 cp build.cfg.sample build.cfg
+
+# replace target compilation based on platform
+if [["$OSTYPE" == "freebsd"*]]; then
+    sed -i '' 's/\-Tlinux/\-Tfreebsd/g' build.cfg
+elif [["$OSTYPE" == "msys"*]]; then
+    sed -i '' 's/\-Tlinux/\-Twin64/g' build.cfg
+fi

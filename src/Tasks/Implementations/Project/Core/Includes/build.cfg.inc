@@ -24,7 +24,8 @@ strBuildCfg: string =
     '#----------------------------------------------' + LineEnding +
     '# Target OS' + LineEnding +
     '# linux : Linux' + LineEnding +
-    '# win64 : Windows (not tested yet)' + LineEnding +
+    '# win64 : Windows 64-bit' + LineEnding +
+    '# win32 : Windows 32-bit' + LineEnding +
     '# freebsd : FreeBSD' + LineEnding +
     '#----------------------------------------------' + LineEnding +
     '-Tlinux' + LineEnding +
@@ -44,23 +45,12 @@ strBuildCfg: string =
     '#-Px86_64' + LineEnding +
     '' + LineEnding +
     '#----------------------------------------------' + LineEnding +
-    '# Add $DEFINE LIBMICROHTTPD' + LineEnding +
-    '# Link with libmicrohttpd' + LineEnding +
-    '#----------------------------------------------' + LineEnding +
-    '#-dLIBMICROHTTPD' + LineEnding +
-    '' + LineEnding +
-    '#----------------------------------------------' + LineEnding +
-    '# Add $DEFINE LIBCURL' + LineEnding +
-    '# Link with libcurl' + LineEnding +
-    '#----------------------------------------------' + LineEnding +
-    '#-dLIBCURL' + LineEnding +
-    '' + LineEnding +
-    '#----------------------------------------------' + LineEnding +
     '# Application Unit search path' + LineEnding +
     '# USER_APP_DIR is contains user application base directory' + LineEnding +
     '#----------------------------------------------' + LineEnding +
     '-Fu$USER_APP_DIR$/Dependencies' + LineEnding +
     '-Fu$USER_APP_DIR$/Routes' + LineEnding +
+    '-Fu$USER_APP_DIR$/App' + LineEnding +
     '#-Fu$USER_APP_DIR$/path/to/other/units' + LineEnding +
     '#-Fu$USER_APP_DIR$/path/to/other/units' + LineEnding +
     '' + LineEnding +

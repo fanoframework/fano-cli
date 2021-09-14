@@ -12,7 +12,7 @@ taskFactory := TCreateViewTaskFactory.create();
 try
     appInst.registerTask(
         'view',
-        '--view=[view-name] Create new view',
+        formatColor('--view', TXT_GREEN) + '=[view-name] Create new view',
         taskFactory.build()
     );
 finally

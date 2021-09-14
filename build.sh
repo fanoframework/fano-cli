@@ -39,4 +39,8 @@ if [ -z "${EXEC_OUTPUT_DIR}" ]; then
     export EXEC_OUTPUT_DIR="bin/out"
 fi
 
-fpc @unit.search.cfg @build.cfg src/fanocli.pas
+if [ -z "${FPC_BIN}" ]; then
+    export FPC_BIN="fpc"
+fi
+
+$FPC_BIN @unit.search.cfg @build.cfg src/fanocli.pas

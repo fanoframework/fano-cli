@@ -77,7 +77,7 @@ resourcestring
     begin
         if isRunAsRoot() then
         begin
-            actualTask.run(opt, longOpt);
+            fActualTask.run(opt, longOpt);
         end else
         begin
             writeln(sErrMustRunAsRoot);

@@ -22,7 +22,7 @@ type
 
     (*!--------------------------------------
      * Task that stage new files so it is
-     *ready for commit
+     * ready for commit
      *
      * @author Zamrony P. Juhara <zamronypj@yahoo.com>
      *---------------------------------------*)

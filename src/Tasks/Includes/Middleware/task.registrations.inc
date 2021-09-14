@@ -12,7 +12,7 @@ taskFactory := TCreateMiddlewareTaskFactory.create();
 try
     appInst.registerTask(
         'middleware',
-        '--middleware=[controller-name] Create new middleware',
+        formatColor('--middleware', TXT_GREEN) + '=[middleware-name] Create new middleware',
         taskFactory.build()
     );
 finally
