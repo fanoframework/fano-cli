@@ -16,7 +16,7 @@ strBuildDispatcherImpl : string =
     '' + LineEnding +
     '        container.add(' + LineEnding +
     '            GuidToString(IDispatcher),' + LineEnding +
-    '            TDispatcherFactory.create(' + LineEnding +
+    '            TMwExecDispatcherFactory.create(' + LineEnding +
     '                container[''appMiddlewares''] as IMiddlewareLinkList,' + LineEnding +
     '                routeMatcher,' + LineEnding +
     '                TRequestResponseFactory.create()' + LineEnding +

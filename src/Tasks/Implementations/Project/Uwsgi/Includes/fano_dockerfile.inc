@@ -14,5 +14,7 @@ strDockerfile : string =
     '' + LineEnding +
     'COPY ./config/ /usr/local/fano/config' + LineEnding +
     'COPY ./resources/ /usr/local/fano/resources' + LineEnding +
+    'COPY ./public/ /usr/local/fano/public' + LineEnding +
     'COPY ./bin/app.cgi /usr/local/fano/app.cgi' + LineEnding +
+    'WORKDIR /usr/local/fano/' + LineEnding +
     'CMD ["/usr/local/fano/app.cgi", "--host=0.0.0.0", "--port=7704"]' + LineEnding;
